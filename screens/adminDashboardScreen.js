@@ -3,19 +3,10 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 
 import Input from "../components/Input"
 
-
-
 class adminDashboardScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: [] };
-    }
-
-    login() {
-        fetch('http://192.168.0.107:80/user/login')
-            .then(res => res.json())
-            .then(alldata_ => this.setState({ data: alldata_ }, () => console.log("successfully fetched alldata", alldata_)))
-        console.log("fetched")
+        this.state = { data: [] }
     }
 
     render() {
@@ -25,7 +16,7 @@ class adminDashboardScreen extends React.Component {
                 <Input style={styles.input} blurOnSubmit autoCapitalize="none" keyboardType="password" value={enteredPasswordValue}/>
                 <Button style={styles.input} title="Login" onPress={login} />
             </View>
-        );
+        )
     }
 }
 

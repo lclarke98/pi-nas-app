@@ -13,6 +13,15 @@ export default function App() {
   const [isLoggedin, setIsLoggedin] = useState(false)
   const [isAdmin, setIsAdmin] = useState()
 
+  const loginHandler = username => {
+    setIsLoggedin(true)
+    if(username === "admin"){
+      setIsAdmin(true)
+    }else{
+      setIsAdmin(false)
+    }
+  }
+
   if(isLoggedin == false){
     content = <LoginScreen/>
   }else if (isLoggedin == true && isAdmin == ture){
@@ -22,7 +31,7 @@ export default function App() {
   }
   
   
-  let content = <LoginScreen/>
+  let content = <LoginScreen onLogin={loginHandler}/>
   return (
     <View style={styles.screen}>
       <Header title="Pi-NAS"/>

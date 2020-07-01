@@ -1,16 +1,19 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import colors from "../constants/colors"
+
+const logout = () => {
+    console.log("logout")
+}
 
 const Header = props =>{
     return(
         <View style={styles.header}>
         <Text style={styles.headerTitle}>{props.title}</Text>
+        <Button title="Logout" onPress={logout}/>
         </View>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     header:{
@@ -25,7 +28,7 @@ const styles = StyleSheet.create({
         color: "black",
         fontSize: 18,
     }
-});
+})
 
 
 export default Header

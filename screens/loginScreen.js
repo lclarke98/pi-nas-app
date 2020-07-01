@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, Alert } from 'react-native';
 
 import Input from "../components/Input"
-
-
 
 class LoginScreen extends React.Component {
     constructor(props) {
@@ -19,7 +17,11 @@ class LoginScreen extends React.Component {
         fetch('http://192.168.0.107:80/user/login')
             .then(res => res.json())
             .then(alldata_ => this.setState({ loginData: alldata_ }, () => console.log("successfully fetched alldata", alldata_)))
-        console.log("fetched")
+            if(data == null){
+                Alert.alert("Incorrect username or password", [{ text: "Okay", style: "destructive" }])
+            }else{
+                this.props.onLogin(data.username)
+            }
     }
 
     render() {
