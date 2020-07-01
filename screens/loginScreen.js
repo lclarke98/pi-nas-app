@@ -2,30 +2,33 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 
 import Input from "../components/Input"
-import Card from "../components/Card"
-import NumberContainer from "../components/NumberContainer"
-import colors from "../constants/colors"
 
 
-class loginScreen extends React.Component {
+
+class LoginScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: [] };
+        this.state = {
+            username:"",
+            password:"",
+            loginData: []
+        }
     }
 
     login() {
         fetch('http://192.168.0.107:80/user/login')
             .then(res => res.json())
-            .then(alldata_ => this.setState({ data: alldata_ }, () => console.log("successfully fetched alldata", alldata_)))
+            .then(alldata_ => this.setState({ loginData: alldata_ }, () => console.log("successfully fetched alldata", alldata_)))
         console.log("fetched")
     }
 
     render() {
         return (
             <View style={styles.screen}>
-                <Input style={styles.input} blurOnSubmit autoCapitalize="none" keyboardType="text" value={enteredUsernameValue}/>
-                <Input style={styles.input} blurOnSubmit autoCapitalize="none" keyboardType="password" value={enteredPasswordValue}/>
-                <Button style={styles.input} title="Login" onPress={login} />
+                <Text>Please enter your login details</Text>
+                <Input style={styles.input} placeholder="Enter username" blurOnSubmit autoCapitalize="none" keyboardType="default" onChangeText={text => this.setState({ username: text })} />
+                <Input style={styles.input} placeholder="Enter password" blurOnSubmit autoCapitalize="none" keyboardType="default" onChangeText={text => this.setState({ password: text })} />
+                <Button style={styles.input} title="Login" onPress={this.login} />
             </View>
         );
     }
@@ -39,6 +42,6 @@ const styles = StyleSheet.create({
     }
 });
 
-export default loginScreen
+export default LoginScreen
 
 
