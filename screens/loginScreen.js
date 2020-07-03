@@ -1,3 +1,5 @@
+"use strict"
+
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Button, Alert } from 'react-native';
 
@@ -9,28 +11,16 @@ class LoginScreen extends React.Component {
         this.state = {
             username:"",
             password:"",
-            loginData: []
         }
-    }
-
-    login() {
-        fetch('http://192.168.0.107:80/user/login')
-            .then(res => res.json())
-            .then(alldata_ => this.setState({ loginData: alldata_ }, () => console.log("successfully fetched alldata", alldata_)))
-            if(data == null){
-                Alert.alert("Incorrect username or password", [{ text: "Okay", style: "destructive" }])
-            }else{
-                this.props.onLogin(data.username)
-            }
     }
 
     render() {
         return (
             <View style={styles.screen}>
                 <Text>Please enter your login details</Text>
-                <Input style={styles.input} placeholder="Enter username" blurOnSubmit autoCapitalize="none" keyboardType="default" onChangeText={text => this.setState({ username: text })} />
-                <Input style={styles.input} placeholder="Enter password" blurOnSubmit autoCapitalize="none" keyboardType="default" onChangeText={text => this.setState({ password: text })} />
-                <Button style={styles.input} title="Login" onPress={this.login} />
+                <Input style={styles.input} placeholder="Enter username" blurOnSubmit autoCapitalize="none" keyboardType="default" value= {this.state.username} onChangeText={text => this.setState({username: text})} />
+                <Input style={styles.input} placeholder="Enter password" blurOnSubmit autoCapitalize="none" keyboardType="default" value= {this.state.password} onChangeText={text => this.setState({password: text})} />
+                <Button style={styles.input} title="Login" onPress={() => this.props.onLogin(this.state.username, this.state.password)} />
             </View>
         );
     }
@@ -45,5 +35,3 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen
-
-
